@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Twitter 280 Length Checker</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+      body {
+        font-size: 1.2rem;
+        font-family: sans-serif;
+      }
+      
+      #counter {
+        color: black;
+      }
+      
+      #counter.error {
+        color: red;
+      }
+      
+      textarea {
+        width: 100%;
+        resize: vertical;
+        font-size: 1.2rem;
+      }
+      
+      textarea.over-limit {
+        color: grey;
+      }
+    </style>
+  </head>
+  <body>
+    <h1 style="font-size: 2rem;">Twitter 280 Length Checker</h1>
+    <textarea id="text-input" rows="6" oninput="countCharacters()"></textarea>
+    <p>Characters: <span id="counter">0</span></p>
+    <script>
+      function countCharacters() {
+        var input = document.getElementById("text-input").value;
+        // replace curly quotes with straight quotes
+        input = input.replace(/[‘’]/g, "'").replace(/[“”]/g, '"');
+        // remove non-ASCII characters
+        input = input.replace(/[^\x20-\x7E]/g, '');
+        var counter = document.getElementById("counter");
+        counter.innerHTML = input.length;
+        if (input.length > 280) {
+          counter.classList.add("error");
+          document.getElementById("text-input").classList.add("over-limit");
+        } else {
+          counter.classList.remove("error");
+          document.getElementById("text-input").classList.remove("over-limit");
+        }
+      }
+    </script>
+  </body>
+</html>
