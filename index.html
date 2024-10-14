@@ -71,6 +71,8 @@
           }
           return match;
         });
+        // Replace brackets with commas
+        input = input.replace(/[()]/g, ',');
         
         document.getElementById("text-input").value = input;
         countCharacters();
